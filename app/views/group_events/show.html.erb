@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row ">
+        <div class="offset-2 col-sm-10 col-md-10 col-lg-11" >
+          <%if @group_event.draft? %>
+            <%= button_to 'Publish', publish_event_group_events_path(id: @group_event), class: "btn btn-primary mt-2", method: :post %>
+          <% end %>
+
+          <p>
+            <strong>Group Name:</strong>
+            <%= @group_event.name %>
+          </p>
+          <p>
+            <strong>Start Date:</strong>
+            <%= @group_event.start_date %>
+          </p>
+          <p>
+            <strong>Description:</strong>
+            <%= @group_event.description.html_safe %>
+          </p>
+          <p>
+            <strong>End Date:</strong>
+            <%= @group_event.end_date %>
+          </p>
+          <p>
+            <strong>Durantion:</strong>
+            <%= @group_event.duration %>
+          </p>
+
+          <%= link_to 'Edit', edit_group_event_path(@group_event), class: "btn btn-inverse" %>
+          <%= link_to 'Back', group_events_path, class: "btn btn-inverse" %>
+     </div>
+    </div>
+</div>

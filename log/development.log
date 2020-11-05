@@ -1,0 +1,1287 @@
+Started GET "/" for ::1 at 2020-11-05 15:26:01 -0700
+  [1m[35m (8.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.8ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (45.4ms)
+Completed 200 OK in 15262ms (Views: 15234.8ms | ActiveRecord: 5.0ms)
+
+
+Started GET "/group_events/new" for ::1 at 2020-11-05 15:26:24 -0700
+Processing by GroupEventsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (35.0ms)
+  Rendered group_events/new.html.erb within layouts/application (36.1ms)
+Completed 200 OK in 126ms (Views: 65.2ms | ActiveRecord: 5.4ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 15:26:31 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"N66Xb03MPudySP1ObbjJwCv5bLFHlvO4vRQ+2uFhECQ3xxgXQaPvxYWFE1Yx1AKPS615hnI0C9PY6ViGbCMtlA==", "group_event"=>{"name"=>"Hello", "description"=>"", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>""}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (7.2ms)[0m  [1m[32mINSERT INTO "group_events" ("name", "description", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Hello"], ["description", ""], ["user_id", 1], ["created_at", "2020-11-05 22:26:31.097695"], ["updated_at", "2020-11-05 22:26:31.097695"]]
+  [1m[35mSQL (9.7ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", ""], ["state", ""], ["country", ""], ["zip", ""], ["group_event_id", 3], ["created_at", "2020-11-05 22:26:31.105977"], ["updated_at", "2020-11-05 22:26:31.105977"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/3
+Completed 302 Found in 26ms (ActiveRecord: 18.9ms)
+
+
+Started GET "/group_events/3" for ::1 at 2020-11-05 15:26:31 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 33ms (Views: 30.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:26:35 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 55ms (Views: 53.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/2/edit" for ::1 at 2020-11-05 15:26:48 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 2], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (4.2ms)
+  Rendered group_events/edit.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 35ms (Views: 32.5ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/group_events/2" for ::1 at 2020-11-05 15:26:55 -0700
+Processing by GroupEventsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AxkKbPooFILSAvFpRVmHdddmYPtEqKFSXnwj44cJ2EYDcIUU9kfFoCXPH3EZNUw6tzJ1zHEKWTk7gUW/Ckvl9g==", "group_event"=>{"name"=>"hello", "description"=>"<p>ssbjhsss</p>", "start_date"=>"2020-11-13", "duration"=>"12"}, "commit"=>"Submit", "id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "group_events" SET "duration" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["duration", 12], ["updated_at", "2020-11-05 22:26:55.536691"], ["id", 2]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:26:55 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 31ms (Views: 29.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/group_events/2" for ::1 at 2020-11-05 15:27:01 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 32ms (Views: 29.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:27:02 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 31ms (Views: 29.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/group_events/2/edit" for ::1 at 2020-11-05 15:27:03 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 2], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.3ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 33ms (Views: 29.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:27:05 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 51ms (Views: 50.0ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/group_events/3" for ::1 at 2020-11-05 15:27:14 -0700
+Processing by GroupEventsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"vcMvtNHde7Mfef8W8ENEzyO3Yo8MEHjmjphqfubpQuS9qqDM3bKqkei0EQ6sL4+AQ+N3uDmygI3rZQwia6t/VA==", "id"=>"3"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddress Load (2.0ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 3], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[31mDELETE FROM "addresses" WHERE "addresses"."id" = $1[0m  [["id", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "group_events" SET "deleted_at" = '2020-11-05 22:27:14.807564', "updated_at" = '2020-11-05 22:27:14.807584' WHERE "group_events"."id" = $1[0m  [["id", 3]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events
+Completed 302 Found in 11ms (ActiveRecord: 5.1ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:27:14 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 30ms (Views: 29.3ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/group_events/2" for ::1 at 2020-11-05 15:27:31 -0700
+Processing by GroupEventsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"LqwyGOjukaMPLQXl3/EL8ZHTRIreGc337fRuASewdF4uxb1g5IFAgfjg6/2DncC+8YdRveu7NZyICQhdqvJJ7g==", "id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "deleted_at" = '2020-11-05 22:27:31.280637', "updated_at" = '2020-11-05 22:27:31.280648' WHERE "group_events"."id" = $1[0m  [["id", 2]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events
+Completed 302 Found in 5ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:27:31 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 31ms (Views: 30.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:28:40 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.7ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 931ms (Views: 911.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:28:44 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 44ms (Views: 42.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/group_events/new" for ::1 at 2020-11-05 15:28:46 -0700
+Processing by GroupEventsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (26.3ms)
+  Rendered group_events/new.html.erb within layouts/application (28.1ms)
+Completed 200 OK in 157ms (Views: 71.8ms | ActiveRecord: 10.7ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 15:28:49 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"s9Ck7PTnjsZ/nW9erIkqgpWjVCgIRX8fUbs2kM3wzyGzuSuU+Ihf5IhQgUbw5eHN9fdBHz3nh3Q0RlDMQLLykQ==", "group_event"=>{"name"=>"sas", "description"=>"", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>""}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "group_events" ("name", "description", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "sas"], ["description", ""], ["user_id", 1], ["created_at", "2020-11-05 22:28:49.518657"], ["updated_at", "2020-11-05 22:28:49.518657"]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", ""], ["state", ""], ["country", ""], ["zip", ""], ["group_event_id", 4], ["created_at", "2020-11-05 22:28:49.521362"], ["updated_at", "2020-11-05 22:28:49.521362"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/4
+Completed 302 Found in 13ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/group_events/4" for ::1 at 2020-11-05 15:28:49 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 70ms (Views: 66.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:28:51 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 57ms (Views: 55.6ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/group_events/4" for ::1 at 2020-11-05 15:28:54 -0700
+Processing by GroupEventsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"c2D/DhSoxXNu21wbja8KEcU3ZC/0KXEtgM2dWi1mW7FzCXB2GMcUUZkWsgPRw8FepWNxGMGLiUblMPsGoCRmAQ==", "id"=>"4"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddress Load (0.4ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 4], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "addresses" WHERE "addresses"."id" = $1[0m  [["id", 2]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "deleted_at" = '2020-11-05 22:28:54.799423', "updated_at" = '2020-11-05 22:28:54.799441' WHERE "group_events"."id" = $1[0m  [["id", 4]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events
+Completed 302 Found in 21ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 15:28:54 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 31ms (Views: 29.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/group_events/new" for ::1 at 2020-11-05 15:29:10 -0700
+Processing by GroupEventsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (3.6ms)
+  Rendered group_events/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 34ms (Views: 31.2ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 15:29:13 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"l4MVWWvaXl/goVFZCLHPX2LZYDL1SrqCtp0pTpGTvSOX6pohZ7WPfRdsv0FU3QQQAo11BcDoQunTYE8SHNGAkw==", "group_event"=>{"name"=>"asa", "description"=>"", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>""}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "group_events" ("name", "description", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "asa"], ["description", ""], ["user_id", 1], ["created_at", "2020-11-05 22:29:13.079711"], ["updated_at", "2020-11-05 22:29:13.079711"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", ""], ["state", ""], ["country", ""], ["zip", ""], ["group_event_id", 5], ["created_at", "2020-11-05 22:29:13.080846"], ["updated_at", "2020-11-05 22:29:13.080846"]]
+  [1m[35m (6.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/5
+Completed 302 Found in 13ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/group_events/5" for ::1 at 2020-11-05 15:29:13 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 30ms (Views: 27.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/5/edit" for ::1 at 2020-11-05 15:29:14 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 5], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (5.8ms)
+  Rendered group_events/edit.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 38ms (Views: 34.8ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/group_events/5" for ::1 at 2020-11-05 15:29:24 -0700
+Processing by GroupEventsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9yuBa31sZJOovX+G7vwWVIUlWyT/aL8DgvTwKA3Mik/3Qg4TcQO1sV9wkZ6ykN0b5XFOE8rKR2jnCZZ0gI63/w==", "group_event"=>{"name"=>"asa", "description"=>"<p><strong>Hellasosa</strong></p>", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>"", "id"=>"3"}}, "commit"=>"Submit", "id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Unpermitted parameter: :id
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "addresses" WHERE "addresses"."id" = $1[0m  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "description" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["description", "<p><strong>Hellasosa</strong></p>"], ["updated_at", "2020-11-05 22:29:24.477068"], ["id", 5]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", ""], ["state", ""], ["country", ""], ["zip", ""], ["group_event_id", 5], ["created_at", "2020-11-05 22:29:24.478246"], ["updated_at", "2020-11-05 22:29:24.478246"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:29:24 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 32ms (Views: 30.7ms | ActiveRecord: 0.3ms)
+
+
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  [1m[36mGroupEvent Load (0.6ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL ORDER BY "group_events"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL ORDER BY "group_events"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAddress Load (0.4ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 5], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "addresses" WHERE "addresses"."id" = $1[0m  [["id", 4]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "group_events" SET "deleted_at" = '2020-11-05 22:30:35.636377', "updated_at" = '2020-11-05 22:30:35.636393' WHERE "group_events"."id" = $1[0m  [["id", 5]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL ORDER BY "group_events"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/group_events/5/edit" for ::1 at 2020-11-05 15:30:56 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Completed 404 Not Found in 10ms (ActiveRecord: 3.5ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent with 'id'=5 [WHERE "group_events"."deleted_at" IS NULL]):
+  
+app/controllers/group_events_controller.rb:47:in `edit'
+Started GET "/" for ::1 at 2020-11-05 15:31:00 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 29ms (Views: 27.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:31:19 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 29ms (Views: 27.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:32:17 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 2244ms (Views: 2242.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/new" for ::1 at 2020-11-05 15:32:25 -0700
+Processing by GroupEventsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (4.4ms)
+  Rendered group_events/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 69ms (Views: 32.7ms | ActiveRecord: 5.1ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 15:34:01 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"x8e+6lVlhtAQJUwTSaGADRbNemkwvfKXfZvAmRcJvLLHrjGSWQpX8ufoogsVzUtCdplvXgUfCvwYZqbFmkuBAg==", "group_event"=>{"name"=>"", "description"=>"<p><em>jhgjh</em>jbhj<span style=\"background-color: #f1c40f;\">hbhs shs agsas</span></p>", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>""}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (9.1ms)
+  Rendered group_events/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 72ms (Views: 61.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 15:34:04 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6FBmoQeIrNQeFXBo21+TKquSCN7a8ifDNkz/DmGnkO7oOenZC+d99unYnnCHM1hly8Yd6e9Q36hTsZlS7OWtXg==", "group_event"=>{"name"=>"", "description"=>"<p><em>jhgjh</em>jbhj<span style=\"background-color: #f1c40f;\">hbhs shs agsas</span></p>", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>""}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (6.0ms)
+  Rendered group_events/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 73ms (Views: 65.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 15:34:07 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"C2OsDymZ3lkKPvSQ6nwJqScpv06P8ylEgzv922hd+OgLCiN3JfYPe/3zGoi2EMLmR32qebpR0S/mxpuH5R/FWA==", "group_event"=>{"name"=>"ass", "description"=>"<p><em>jhgjh</em>jbhj<span style=\"background-color: #f1c40f;\">hbhs shs agsas</span></p>", "start_date"=>"", "duration"=>"", "address_attributes"=>{"country"=>"", "city"=>"", "state"=>"", "zip"=>""}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "group_events" ("name", "description", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "ass"], ["description", "<p><em>jhgjh</em>jbhj<span style=\"background-color: #f1c40f;\">hbhs shs agsas</span></p>"], ["user_id", 1], ["created_at", "2020-11-05 22:34:07.537563"], ["updated_at", "2020-11-05 22:34:07.537563"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", ""], ["state", ""], ["country", ""], ["zip", ""], ["group_event_id", 6], ["created_at", "2020-11-05 22:34:07.538746"], ["updated_at", "2020-11-05 22:34:07.538746"]]
+  [1m[35m (5.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/6
+Completed 302 Found in 12ms (ActiveRecord: 6.5ms)
+
+
+Started GET "/group_events/6" for ::1 at 2020-11-05 15:34:07 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 77ms (Views: 74.6ms | ActiveRecord: 0.3ms)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (8256.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "exercise_201104_bilal_development"[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Bilal"], ["email", "bilal.ror77@gmail.com"], ["password", "12345678"], ["created_at", "2020-11-05 22:36:11.221386"], ["updated_at", "2020-11-05 22:36:11.221386"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2051770397350853760)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(2051770397350853760)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Bilal"], ["email", "bilal.ror77@gmail.com"], ["password", "12345678"], ["created_at", "2020-11-05 22:36:27.060408"], ["updated_at", "2020-11-05 22:36:27.060408"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/group_events/6" for ::1 at 2020-11-05 15:37:28 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.9ms)
+Started GET "/group_events/6" for ::1 at 2020-11-05 15:37:29 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mGroupEvent Load (1.8ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 165ms (Views: 138.1ms | ActiveRecord: 12.9ms)
+
+
+Completed 200 OK in 761ms (Views: 693.3ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:37:32 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 82ms (Views: 78.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:38:01 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 50ms (Views: 41.2ms | ActiveRecord: 3.1ms)
+
+
+  [1m[35mSQL (1.8ms)[0m  [1m[33mUPDATE "group_events" SET "deleted_at" = NULL WHERE "group_events"."deleted_at" IS NULL[0m
+Started GET "/" for ::1 at 2020-11-05 15:38:18 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 51ms (Views: 49.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 15:38:19 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 32ms (Views: 30.4ms | ActiveRecord: 0.3ms)
+
+
+  [1m[35mSQL (1.6ms)[0m  [1m[33mUPDATE "group_events" SET "deleted_at" = NULL[0m
+Started GET "/" for ::1 at 2020-11-05 15:38:30 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 30ms (Views: 28.7ms | ActiveRecord: 0.3ms)
+
+
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL ORDER BY "group_events"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL ORDER BY "group_events"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "group_events" SET "status" = $1, "start_date" = $2, "duration" = $3, "updated_at" = $4 WHERE "group_events"."id" = $5[0m  [["status", 1], ["start_date", "2020-11-10 00:07:16.637539"], ["duration", 3], ["updated_at", "2020-11-06 00:07:19.046576"], ["id", 6]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "group_events" SET "status" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["status", 0], ["updated_at", "2020-11-06 00:07:30.101786"], ["id", 6]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "group_events" SET "status" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["status", 1], ["updated_at", "2020-11-06 00:07:34.989763"], ["id", 6]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Started GET "/" for ::1 at 2020-11-05 17:10:01 -0700
+Processing by GroupEventsController#index as HTML
+Completed 500 Internal Server Error in 96ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `set_group_event!' for #<GroupEventsController:0x00007fdc3b5cc6e0>
+Did you mean?  set_group_event):
+  
+activesupport (5.1.7) lib/active_support/callbacks.rb:413:in `block in make_lambda'
+activesupport (5.1.7) lib/active_support/callbacks.rb:178:in `block (2 levels) in halting_and_conditional'
+actionpack (5.1.7) lib/abstract_controller/callbacks.rb:12:in `block (2 levels) in <module:Callbacks>'
+activesupport (5.1.7) lib/active_support/callbacks.rb:179:in `block in halting_and_conditional'
+activesupport (5.1.7) lib/active_support/callbacks.rb:507:in `block in invoke_before'
+activesupport (5.1.7) lib/active_support/callbacks.rb:507:in `each'
+activesupport (5.1.7) lib/active_support/callbacks.rb:507:in `invoke_before'
+activesupport (5.1.7) lib/active_support/callbacks.rb:130:in `run_callbacks'
+actionpack (5.1.7) lib/abstract_controller/callbacks.rb:19:in `process_action'
+actionpack (5.1.7) lib/action_controller/metal/rescue.rb:20:in `process_action'
+actionpack (5.1.7) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+activesupport (5.1.7) lib/active_support/notifications.rb:166:in `block in instrument'
+activesupport (5.1.7) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+activesupport (5.1.7) lib/active_support/notifications.rb:166:in `instrument'
+actionpack (5.1.7) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+actionpack (5.1.7) lib/action_controller/metal/params_wrapper.rb:252:in `process_action'
+activerecord (5.1.7) lib/active_record/railties/controller_runtime.rb:22:in `process_action'
+actionpack (5.1.7) lib/abstract_controller/base.rb:124:in `process'
+actionview (5.1.7) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.1.7) lib/action_controller/metal.rb:189:in `dispatch'
+actionpack (5.1.7) lib/action_controller/metal.rb:253:in `dispatch'
+actionpack (5.1.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (5.1.7) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (5.1.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.7) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.7) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.7) lib/action_dispatch/routing/route_set.rb:844:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+rack (2.2.3) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.3) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.7) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.7) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.7) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-11-05 17:10:17 -0700
+Processing by GroupEventsController#index as HTML
+Completed 404 Not Found in 7ms (ActiveRecord: 2.1ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent without an ID):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started GET "/" for ::1 at 2020-11-05 17:10:30 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 62ms (Views: 50.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/group_events/6" for ::1 at 2020-11-05 17:10:32 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 44ms (Views: 41.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/6/edit" for ::1 at 2020-11-05 17:10:34 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.4ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 6], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (56.6ms)
+  Rendered group_events/edit.html.erb within layouts/application (58.0ms)
+Completed 200 OK in 126ms (Views: 120.9ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/group_events/1/edit" for ::1 at 2020-11-05 17:10:38 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.5ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 1], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.6ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 35ms (Views: 31.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/group_events/6" for ::1 at 2020-11-05 17:10:40 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 31ms (Views: 28.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:10:42 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 30ms (Views: 28.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/new" for ::1 at 2020-11-05 17:11:00 -0700
+Processing by GroupEventsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (3.7ms)
+  Rendered group_events/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 53ms (Views: 32.3ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 17:11:11 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0zA3RJ1EltHlsf5dQsybogXCDnNI8MaoeSO3ljdPwVXTWbg8kStH8xJ8EEUeoFDtZZYbRH1SPsMc3tHKug385Q==", "group_event"=>{"name"=>"hellasa", "description"=>"<p>assaassa</p>", "start_date"=>"2020-11-12", "duration"=>"4", "address_attributes"=>{"country"=>"pass", "city"=>"ass", "state"=>"assa", "zip"=>"asass"}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (6.9ms)[0m  [1m[32mINSERT INTO "group_events" ("name", "description", "status", "start_date", "duration", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "hellasa"], ["description", "<p>assaassa</p>"], ["status", 1], ["start_date", "2020-11-12 00:00:00"], ["duration", 4], ["user_id", 1], ["created_at", "2020-11-06 00:11:11.194260"], ["updated_at", "2020-11-06 00:11:11.194260"]]
+  [1m[35mSQL (6.1ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", "ass"], ["state", "assa"], ["country", "pass"], ["zip", "asass"], ["group_event_id", 7], ["created_at", "2020-11-06 00:11:11.202161"], ["updated_at", "2020-11-06 00:11:11.202161"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/7
+Completed 302 Found in 23ms (ActiveRecord: 14.9ms)
+
+
+Started GET "/group_events/7" for ::1 at 2020-11-05 17:11:11 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 53ms (Views: 51.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:11:16 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 32ms (Views: 30.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/group_events/7" for ::1 at 2020-11-05 17:11:18 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 32ms (Views: 29.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:11:44 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 33ms (Views: 31.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/1/edit" for ::1 at 2020-11-05 17:11:46 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.4ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 1], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.6ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 34ms (Views: 31.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/group_events/1" for ::1 at 2020-11-05 17:11:49 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 31ms (Views: 28.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event?event=1" for ::1 at 2020-11-05 17:11:51 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"HwIj/x8Fg9RaCQML/vbZzOjFuiB2HwR6OX4ieYA38uAfa6yHE2pS9q3E7ROimhKDiJGvF0O9/BFcg0QlDXXPUA==", "event"=>"1"}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent without an ID):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:11:55 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:11:55 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:12:01 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:12:01 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:12:07 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:12:09 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:12:11 -0700
+Started PUT "/__web_console/repl_sessions/c012b2f7dc42fb6b1c95a998f452cf16" for ::1 at 2020-11-05 17:12:13 -0700
+Started POST "/group_events/publish_event?event=1" for ::1 at 2020-11-05 17:12:27 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"HwIj/x8Fg9RaCQML/vbZzOjFuiB2HwR6OX4ieYA38uAfa6yHE2pS9q3E7ROimhKDiJGvF0O9/BFcg0QlDXXPUA==", "event"=>"1"}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent without an ID):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started GET "/group_events/1" for ::1 at 2020-11-05 17:12:28 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 31ms (Views: 27.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event.1" for ::1 at 2020-11-05 17:12:29 -0700
+Processing by GroupEventsController#publish_event as 
+  Parameters: {"authenticity_token"=>"JGgM5W3YBhSxfw6uSx363jO6vrUowMF6HWjHAuEXtl4kAYOdYbfXNkay4LYXcTGRU+6rgh1iORF4laFebFWL7g=="}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent without an ID):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started PUT "/__web_console/repl_sessions/d5fccf4826f7bb18434fb59b85e03aa2" for ::1 at 2020-11-05 17:12:33 -0700
+Started PUT "/__web_console/repl_sessions/d5fccf4826f7bb18434fb59b85e03aa2" for ::1 at 2020-11-05 17:12:33 -0700
+Started GET "/group_events/1" for ::1 at 2020-11-05 17:12:58 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 59ms (Views: 56.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event?id=1" for ::1 at 2020-11-05 17:12:59 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"ueCZhQYrrX59Un1dHccPuzvZiNLguBHY59XRyVyJM7m5iRb9CkR8XIqfk0VBq8T0W42d5dUa6bOCKLeV0csOCQ==", "id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/group_events/1/edit
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/1/edit" for ::1 at 2020-11-05 17:12:59 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 1], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.1ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 34ms (Views: 31.5ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/group_events/1" for ::1 at 2020-11-05 17:13:04 -0700
+Processing by GroupEventsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"MboyC4AgCWgCPhDnwuSdNadzy/I0ac36BaRlwJqa62Ux071zjE/YSvXz/v+eiFZ6xyfexQHLNZFgWQOcF9jW1Q==", "group_event"=>{"name"=>"name", "description"=>"<p>assas</p>", "start_date"=>"", "duration"=>"212"}, "commit"=>"Submit", "id"=>"1"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "group_events" SET "duration" = $1, "description" = $2, "updated_at" = $3 WHERE "group_events"."id" = $4[0m  [["duration", 212], ["description", "<p>assas</p>"], ["updated_at", "2020-11-06 00:13:04.354460"], ["id", 1]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 17:13:04 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 30ms (Views: 28.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/7" for ::1 at 2020-11-05 17:13:07 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 29ms (Views: 26.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:13:09 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 31ms (Views: 29.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/5" for ::1 at 2020-11-05 17:13:11 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 30ms (Views: 27.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/group_events/publish_event?id=5" for ::1 at 2020-11-05 17:13:12 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"MRG/8gB0gDYm8lPmfRtTpLLOgCOUWenJee8G7Lw+4BExeDCKDBtRFNE/vf4hd5jr0pqVFKH7EaIcEmCwMXzdoQ==", "id"=>"5"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/group_events/5/edit
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/group_events/5/edit" for ::1 at 2020-11-05 17:13:12 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 5], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.3ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 54ms (Views: 52.0ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/group_events/5" for ::1 at 2020-11-05 17:13:16 -0700
+Processing by GroupEventsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"V3SKxXdG0AnNJsdlicXK5bnbI85SOK1PQY+mjUVrYvRXHQW9eykBKzrrKX3VqQGq2Y82+WeaVSQkcsDRyClfRA==", "group_event"=>{"name"=>"asa", "description"=>"<p><strong>Hellasosa</strong></p>", "start_date"=>"", "duration"=>"3"}, "commit"=>"Submit", "id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "group_events" SET "duration" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["duration", 3], ["updated_at", "2020-11-06 00:13:16.370267"], ["id", 5]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 17:13:16 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 32ms (Views: 30.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/5" for ::1 at 2020-11-05 17:13:20 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 31ms (Views: 28.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event?id=5" for ::1 at 2020-11-05 17:13:22 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"p3qmg/mue17LxEnzwcT88ogqLT+I4BJn82UUQKNp2FGnEyn79cGqfDwJp+udqDe96H44CL1C6gyWmHIcLivl4Q==", "id"=>"5"}
+  [1m[36mGroupEvent Load (0.6ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/group_events/5/edit
+Completed 302 Found in 3ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/group_events/5/edit" for ::1 at 2020-11-05 17:13:22 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 5], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (2.9ms)
+  Rendered group_events/edit.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 32ms (Views: 29.9ms | ActiveRecord: 0.7ms)
+
+
+Started PATCH "/group_events/5" for ::1 at 2020-11-05 17:13:28 -0700
+Processing by GroupEventsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"na+Br2ZgYEC+sqgRgBmdUc+pca/8frR8e6SMzxVyzmedxg7Xag+xYkl/RgncdVYer/1kmMncTBceWeqTmDDz1w==", "group_event"=>{"name"=>"asa", "description"=>"<p><strong>Hellasosa</strong></p>", "start_date"=>"2020-11-12", "duration"=>"3"}, "commit"=>"Submit", "id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "start_date" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["start_date", "2020-11-12 00:00:00"], ["updated_at", "2020-11-06 00:13:28.265228"], ["id", 5]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 17:13:28 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 32ms (Views: 30.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/group_events/5" for ::1 at 2020-11-05 17:13:30 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 30ms (Views: 26.9ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/group_events/publish_event?id=5" for ::1 at 2020-11-05 17:13:31 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"NX1l1cJ7ng1wPXEPTDIR9qN9alBvhsfQqkSE9rKEJbM1FOqtzhRPL4fwnxcQXtq5wyl/Z1okP7vPueKqP8YYAw==", "id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "status" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["status", 1], ["updated_at", "2020-11-06 00:13:31.519047"], ["id", 5]]
+  [1m[35m (5.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/5
+Completed 302 Found in 11ms (ActiveRecord: 6.8ms)
+
+
+Started GET "/group_events/5" for ::1 at 2020-11-05 17:13:31 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 52ms (Views: 48.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:13:34 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 35ms (Views: 33.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/5" for ::1 at 2020-11-05 17:13:36 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 32ms (Views: 29.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:13:44 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 31ms (Views: 29.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:15:33 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:18:27 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 63ms (Views: 58.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:19:08 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 31ms (Views: 29.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/publish_event?id=1" for ::1 at 2020-11-05 17:19:14 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"publish_event"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent with 'id'=publish_event [WHERE "group_events"."deleted_at" IS NULL]):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started GET "/group_events/publish_event?id=1" for ::1 at 2020-11-05 17:19:42 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"publish_event"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent with 'id'=publish_event [WHERE "group_events"."deleted_at" IS NULL]):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started GET "/group_events" for ::1 at 2020-11-05 17:19:44 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event" for ::1 at 2020-11-05 17:19:45 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"ivjTC74ZWRKI3eL6UVb1LkF9O+IqukwIfMiIX3M3XwmKkVxzsnaIMH8QDOINOj5hISku1R8YtGMZNe4D/nViuQ=="}
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find GroupEvent without an ID):
+  
+app/controllers/group_events_controller.rb:60:in `set_group_event'
+Started PUT "/__web_console/repl_sessions/051ca2530bda321d5e7452a5e30f47fd" for ::1 at 2020-11-05 17:19:49 -0700
+Started PUT "/__web_console/repl_sessions/051ca2530bda321d5e7452a5e30f47fd" for ::1 at 2020-11-05 17:19:50 -0700
+Started GET "/group_events" for ::1 at 2020-11-05 17:19:58 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 32ms (Views: 30.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event?id=1" for ::1 at 2020-11-05 17:19:59 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"4xNTwToiRHgrrGo3ucP6FibkXyf28Bdd6RQqCerjvaXjety5Nk2VWtxhhC/lrzFZRrBKEMNS7zaM6UxVZ6GAFQ==", "id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/group_events/1/edit
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/1/edit" for ::1 at 2020-11-05 17:19:59 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 1], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (10.6ms)
+  Rendered group_events/edit.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 41ms (Views: 36.6ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:20:23 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 31ms (Views: 29.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:20:57 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 59ms (Views: 57.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:21:09 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 34ms (Views: 32.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/5/edit" for ::1 at 2020-11-05 17:21:34 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 5], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (4.0ms)
+  Rendered group_events/edit.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 35ms (Views: 32.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:21:42 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 33ms (Views: 31.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/new" for ::1 at 2020-11-05 17:21:48 -0700
+Processing by GroupEventsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering group_events/new.html.erb within layouts/application
+  Rendered group_events/_form.html.erb (4.4ms)
+  Rendered group_events/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 57ms (Views: 33.6ms | ActiveRecord: 5.2ms)
+
+
+Started POST "/group_events" for ::1 at 2020-11-05 17:22:03 -0700
+Processing by GroupEventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jTv/LeiJSKki0HQxPimgwrBMRqUnq+wk1W9fuKC66TqNUnBV5OaZi9UdmiliRWuN0BhTkhIJFE+wkjnkLfjUig==", "group_event"=>{"name"=>"Hellsoasa", "description"=>"<p>aassasas</p>", "start_date"=>"2020-11-13", "duration"=>"21", "address_attributes"=>{"country"=>"ssas", "city"=>"asa", "state"=>"asas", "zip"=>"as"}}, "commit"=>"Submit"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "group_events" ("name", "description", "status", "start_date", "duration", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Hellsoasa"], ["description", "<p>aassasas</p>"], ["status", 1], ["start_date", "2020-11-13 00:00:00"], ["duration", 21], ["user_id", 1], ["created_at", "2020-11-06 00:22:03.490836"], ["updated_at", "2020-11-06 00:22:03.490836"]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "addresses" ("city", "state", "country", "zip", "group_event_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["city", "asa"], ["state", "asas"], ["country", "ssas"], ["zip", "as"], ["group_event_id", 8], ["created_at", "2020-11-06 00:22:03.492287"], ["updated_at", "2020-11-06 00:22:03.492287"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/8
+Completed 302 Found in 14ms (ActiveRecord: 7.1ms)
+
+
+Started GET "/group_events/8" for ::1 at 2020-11-05 17:22:03 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 29ms (Views: 27.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:22:04 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 61ms (Views: 35.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/2/edit" for ::1 at 2020-11-05 17:22:18 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 2], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.4ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 33ms (Views: 30.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:22:21 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 33ms (Views: 31.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event?id=2" for ::1 at 2020-11-05 17:22:23 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"W/4W0nGuJIBK9Kv0jQoa5ex1wwJzgF4JzM4r1kSMAU5bl5mqfcH1or05RezRZtGqjCHWNUYipmKpM02Kyc48/g==", "id"=>"2"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "status" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["status", 1], ["updated_at", "2020-11-06 00:22:23.743126"], ["id", 2]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events/2
+Completed 302 Found in 6ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/group_events/2" for ::1 at 2020-11-05 17:22:23 -0700
+Processing by GroupEventsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering group_events/show.html.erb within layouts/application
+  Rendered group_events/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 29ms (Views: 27.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:22:26 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 33ms (Views: 31.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:22:52 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 60ms (Views: 51.4ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/group_events/3/edit" for ::1 at 2020-11-05 17:22:55 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 3], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (6.8ms)
+  Rendered group_events/edit.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 36ms (Views: 33.4ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/group_events/3" for ::1 at 2020-11-05 17:23:01 -0700
+Processing by GroupEventsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tYNk3aNlpj2x3k4icY/glrV/A8U6hrwYTxH9Ab/t5WG16uulrwp3H0YToDot4yvZ1SsW8g8kRHMq7JtdMq/Y0Q==", "group_event"=>{"name"=>"Hello", "description"=>"<p>asas</p>", "start_date"=>"2020-11-12", "duration"=>"212"}, "commit"=>"Submit", "id"=>"3"}
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "group_events" SET "start_date" = $1, "duration" = $2, "description" = $3, "updated_at" = $4 WHERE "group_events"."id" = $5[0m  [["start_date", "2020-11-12 00:00:00"], ["duration", 212], ["description", "<p>asas</p>"], ["updated_at", "2020-11-06 00:23:01.047487"], ["id", 3]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 4.9ms)
+
+
+Started GET "/" for ::1 at 2020-11-05 17:23:01 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 31ms (Views: 29.7ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events/publish_event?id=3" for ::1 at 2020-11-05 17:23:05 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"NRI1C4T/8AuNcRv3CLx7dd9pgQgqfwjut1FJu8WZdT41e7pziJAhKXq89e9U0LA6vz2UPx/d8IXSrC/nSNtIjg==", "id"=>"3"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "status" = $1, "updated_at" = $2 WHERE "group_events"."id" = $3[0m  [["status", 1], ["updated_at", "2020-11-06 00:23:05.280079"], ["id", 3]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/group_events
+Completed 302 Found in 6ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:23:05 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 31ms (Views: 29.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/group_events/publish_event?id=4" for ::1 at 2020-11-05 17:23:10 -0700
+Processing by GroupEventsController#publish_event as HTML
+  Parameters: {"authenticity_token"=>"DU0ELIo6I7umcB1vATK5uejV6aKqAalkaaE8FSp6OH0NJItUhlXymVG983ddXnL2iIH8lZ+jUQ8MXFpJpzgFzQ==", "id"=>"4"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Redirected to http://localhost:3000/group_events/4/edit
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/group_events/4/edit" for ::1 at 2020-11-05 17:23:10 -0700
+Processing by GroupEventsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL AND "group_events"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering group_events/edit.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT  "addresses".* FROM "addresses" WHERE "addresses"."group_event_id" = $1 LIMIT $2[0m  [["group_event_id", 4], ["LIMIT", 1]]
+  Rendered group_events/_form.html.erb (3.2ms)
+  Rendered group_events/edit.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 56ms (Views: 53.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/group_events" for ::1 at 2020-11-05 17:23:12 -0700
+Processing by GroupEventsController#index as HTML
+  Rendering group_events/index.html.erb within layouts/application
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."deleted_at" IS NULL[0m
+  Rendered group_events/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 33ms (Views: 31.8ms | ActiveRecord: 0.3ms)
+
+
